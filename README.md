@@ -6,6 +6,7 @@ API RESTful desenvolvida para a gestão de eventos de corrida de rua, atletas e 
 
 - Iago Cardoso Rabello de Souza - https://github.com/IagoCrs
 - Guilherme Rosa das Neves Borges da Silva - https://github.com/guiborgesilva
+- Renan da Rosa de Oliveira - https://github.com/renanrdeoliveira
 
 ## Problema
 
