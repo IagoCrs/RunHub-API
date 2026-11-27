@@ -57,3 +57,42 @@ classDiagram
 
     Athlete "1" --> "0..*" Registration : realiza
     Event "1" --> "0..*" Registration : possui
+```
+
+## Como rodar
+
+Use o JDK 17 ou superior. Na raiz do projeto, rode `./mvnw spring-boot:run` (no Windows, `mvnw.cmd spring-boot:run`).
+
+A API roda em `http://localhost:8080`. Como o H2 está em memória, os dados são apagados quando a aplicação para.
+
+## Eventos
+
+- `POST /events` — cadastra um evento (`201`).
+- `GET /events` — lista os eventos (`200`).
+- `GET /events/{id}` — busca um evento (`200`).
+- `PUT /events/{id}` — atualiza um evento (`200`).
+- `DELETE /events/{id}` — exclui um evento (`204`).
+
+Exemplo de listagem no Postman:
+
+```http
+GET http://localhost:8080/events?city=Porto&page=0&size=5&sort=eventDate,desc
+```
+
+O filtro `city` é opcional e aceita parte do nome. A página começa em `0`. Por padrão, são 10 eventos por página, da data mais antiga para a mais recente.
+
+No `POST` e no `PUT`, envie este JSON com `Content-Type: application/json`.
+
+```json
+{
+  "title": "Corrida da Orla",
+  "city": "Porto Alegre",
+  "eventDate": "2027-04-18T08:00:00",
+  "distanceKm": 5.0,
+  "maxParticipants": 200
+}
+```
+
+Todos os campos são obrigatórios. A distância e o limite de participantes precisam ser maiores que zero.
+
+O evento começa com status `OPEN`. Use o `id` da resposta do cadastro nas rotas com `{id}`. Um evento que não existe retorna `404`. Tentar excluir um evento com inscrições retorna `409`.
